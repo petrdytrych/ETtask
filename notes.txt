@@ -1,0 +1,14 @@
+TODO List
+=========
+[Step-1] rozběhat projekt
+[Step-2] přidat k produktu sériové číslo
+[Step-3] přidat možnost zadávat nové produkty a měnit existující
+[Step-4] přidat fulltext vyhledávání
+[Step-5] výsledek přidat do GIT repozitáře a poslat nám odkaz na něj
+
+
+Notes
+=====
+- jetty byl v gradle od verze 4 nehrazen gretty pluginem
+	- viz https://docs.gradle.org/3.5/userguide/jetty_plugin.html
+	- https://github.com/akhikhl/gretty
