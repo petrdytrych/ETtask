@@ -8,6 +8,11 @@ import java.util.List;
 @Repository("productDao")
 public class ProductDaoImpl extends AbstractDao implements ProductDao {
 
+	@Override
+	public Product findById(int id) {
+		return (Product) getSession().get(Product.class, id);
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<Product> getProducts() {
 		Criteria criteria = getSession().createCriteria(Product.class);

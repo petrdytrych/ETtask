@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ProductService {
 
+	ProductModel findById(int id);
+
 	@Transactional(readOnly = true)
 	List<ProductModel> getProducts();
 

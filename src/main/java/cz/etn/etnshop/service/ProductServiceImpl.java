@@ -20,28 +20,36 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao productDao;
 
-	@Override
+    @Override
+    public ProductModel findById(int id) {
+        Product product = productDao.findById(id);
+        logger.info("For ID {} found: {}", id, product);
+        return product != null ? new ProductModel(product) : null;
+    }
+
+    @Override
 	public List<ProductModel> getProducts() {
 		List<Product> products = productDao.getProducts();
-		if (products == null || products.isEmpty()) {
-			return Collections.emptyList();
-		} else {
-			return getProductsMappedToModel(products);
-		}
+        if (products == null || products.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            return getProductsMappedToModel(products);
+        }
 	}
 
 	@Override
 	public int save(ProductModel productModel) {
         Product product = getProductModelMappedToEntity(productModel);
         int id = productDao.save(product);
-        logger.info("Product saved: " + product);
+        logger.info("Product saved: {}", product);
         return id;
     }
 
 	private Product getProductModelMappedToEntity(ProductModel productModel) {
 		Product product = new Product();
+        product.setId(productModel.getId());
 		product.setName(productModel.getName());
-		product.setSerialNumber(productModel.getName());
+		product.setSerialNumber(productModel.getSerialNumber());
 		return product;
 	}
 

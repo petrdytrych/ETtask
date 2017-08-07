@@ -20,6 +20,7 @@
 				<th>ID</th>
 				<th>Name</th>
 				<th>Serial Number</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,6 +29,7 @@
 					<td>${product.id}</td>
 					<td>${product.name}</td>
 					<td>${product.serialNumber}</td>
+					<td><a class="btn btn-info btn-sm" href="/etnshop/product/edit/${product.id}" role="button">Edit Product</a></td>
 				</tr>	
 			</c:forEach>
 		</tbody>
