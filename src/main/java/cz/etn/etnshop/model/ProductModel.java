@@ -1,10 +1,12 @@
 package cz.etn.etnshop.model;
 
 import cz.etn.etnshop.dao.Product;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class ProductModel {
 
-    private int id;
+    private Integer id;
     private String name;
     private String serialNumber;
 
@@ -16,11 +18,11 @@ public class ProductModel {
         this.serialNumber = product.getSerialNumber();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,6 +43,11 @@ public class ProductModel {
     }
 
     public boolean isNew() {
-        return id == 0;
+        return id == null;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

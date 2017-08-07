@@ -35,6 +35,7 @@
 	<hr>
 	<p>
 		<a class="btn btn-primary btn-lg" href="/etnshop" role="button">Back to homepage</a>
+		<a class="btn btn-primary btn-lg" href="/etnshop/product/add" role="button">Add Product</a>
 	</p>
 	<footer>
 		<p>&copy; Etnetera a.s. 2015</p>

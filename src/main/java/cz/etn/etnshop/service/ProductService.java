@@ -10,4 +10,5 @@ public interface ProductService {
 	@Transactional(readOnly = true)
 	List<ProductModel> getProducts();
 
+	int save(ProductModel productModel);
 }

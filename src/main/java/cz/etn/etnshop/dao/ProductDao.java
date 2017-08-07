@@ -1,12 +1,15 @@
 package cz.etn.etnshop.dao;
 
-import java.util.List;
-
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 public interface ProductDao {
 
 	@Transactional(readOnly = true)
 	List<Product> getProducts();
+
+	@Transactional()
+	int save(Product product);
 
 }
