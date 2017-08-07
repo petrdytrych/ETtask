@@ -1,13 +1,7 @@
 package cz.etn.etnshop.dao;
 
+import javax.persistence.*;
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "product")
@@ -18,6 +12,8 @@ public class Product implements Serializable {
 	private int id;
 
 	private String name;
+
+	private String serialNumber;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,4 +34,12 @@ public class Product implements Serializable {
 		this.name = name;
 	}
 
+	@Column(name = "serial_number", nullable = false)
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
 }
