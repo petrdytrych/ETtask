@@ -6,7 +6,10 @@ import java.util.List;
 
 public interface ProductDao {
 
-	@Transactional
+	@Transactional(readOnly = true)
+	List<Product> findByFulltext(String text);
+
+	@Transactional(readOnly = true)
 	Product findById(int id);
 
 	@Transactional(readOnly = true)

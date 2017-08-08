@@ -3,6 +3,7 @@ package cz.etn.etnshop.service;
 import cz.etn.etnshop.dao.Product;
 import cz.etn.etnshop.dao.ProductDao;
 import cz.etn.etnshop.model.ProductModel;
+import cz.etn.etnshop.model.SearchModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +29,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductModel> findByFulltext(SearchModel search) {
+        List<Product> products = productDao.findByFulltext(search.getText());
+        return getProductModel(products);
+    }
+
+    @Override
 	public List<ProductModel> getProducts() {
 		List<Product> products = productDao.getProducts();
-        if (products == null || products.isEmpty()) {
-            return Collections.emptyList();
-        } else {
-            return getProductsMappedToModel(products);
-        }
-	}
+        return getProductModel(products);
+    }
 
-	@Override
+    @Override
 	public int save(ProductModel productModel) {
         Product product = getProductModelMappedToEntity(productModel);
         int id = productDao.save(product);
         logger.info("Product saved: {}", product);
         return id;
+    }
+
+    private List<ProductModel> getProductModel(List<Product> products) {
+        if (products == null || products.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            return getProductsMappedToModel(products);
+        }
     }
 
 	private Product getProductModelMappedToEntity(ProductModel productModel) {

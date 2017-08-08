@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +15,17 @@
 
 <div class="container">
 	<h2>Products</h2>
+	<form:form method="post" modelAttribute="search" action="/etnshop/product/list">
+		<spring:bind path="text">
+			<div class="form-group ${status.error ? 'has-error' : ''}">
+				<label class="col-sm-2 control-label">Search</label>
+				<div class="col-sm-10">
+					<form:input path="text" type="text" class="form-control" id="text" />
+					<form:errors path="text" class="control-label" />
+				</div>
+			</div>
+		</spring:bind>
+	</form:form>
 	<table class="table">
 		<thead>
 			<tr>

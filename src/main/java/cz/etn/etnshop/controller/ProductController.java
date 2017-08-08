@@ -1,7 +1,9 @@
 package cz.etn.etnshop.controller;
 
 import cz.etn.etnshop.model.ProductModel;
+import cz.etn.etnshop.model.SearchModel;
 import cz.etn.etnshop.service.ProductService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +30,21 @@ public class ProductController {
 	public ModelAndView list() {
 		logger.debug("list()");
 		ModelAndView modelAndView = new ModelAndView("product/list");
+		modelAndView.addObject("search", new SearchModel());
 		modelAndView.addObject("products", productService.getProducts());
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	public ModelAndView list(@Validated SearchModel search) {
+		logger.debug("list() : {}", search);
+		ModelAndView modelAndView = new ModelAndView("product/list");
+		modelAndView.addObject("search", search);
+        if (StringUtils.isEmpty(search.getText())) {
+            modelAndView.addObject("products", productService.getProducts());
+        } else {
+            modelAndView.addObject("products", productService.findByFulltext(search));
+        }
 		return modelAndView;
 	}
 
@@ -56,7 +71,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(@ModelAttribute("userForm") @Validated ProductModel productModel,
+	public String save(@Validated ProductModel productModel,
 							 BindingResult result, Model model,
 							 final RedirectAttributes redirectAttributes) {
 		logger.debug("save() : {}", productModel);
