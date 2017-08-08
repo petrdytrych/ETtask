@@ -14,7 +14,7 @@
 
 <div class="container">
 	<h2>New product</h2>
-		<form:form method="post" modelAttribute="product" action="/etnshop/product/save">
+	<form:form method="post" modelAttribute="product" action="/etnshop/product/save">
 
 		<form:hidden path="id" />
 
