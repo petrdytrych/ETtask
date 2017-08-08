@@ -1,0 +1,1 @@
+ALTER TABLE product ADD FULLTEXT product_fulltext (name,serial_number);
